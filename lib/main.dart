@@ -9,38 +9,43 @@ void main() {
   runApp(ProviderScope(child: MyRiverpod()));
 }
 
-class MyRiverpod extends ConsumerWidget {
+class MyRiverpod extends ConsumerStatefulWidget {
   const MyRiverpod({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      home: Scaffold(appBar: AppBar(title: Text('Main')), body:
-      Center(
-        child: Column(children: [
-            Consumer(builder: (context, ref, child) {
-              final message=ref.watch(myProvider);
-              return Text(message);
-            },)
-          ],),
-      ),),
-    );
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _MyRiverpodState();
   }
 
 }
 
-// class MyRiverpod extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     return MyRiverpodState();
-//   }
-// }
+class _MyRiverpodState extends ConsumerState<MyRiverpod> {
+  @override
+  Widget build(BuildContext context) {
+    final message=ref.watch(myProvider);
+    return MaterialApp(
+      home: Scaffold(body:Center(child: Text(message),), appBar: AppBar(title: Text('Home Screen'),),),);
+  }
+
+}
+
+// class MyRiverpod extends ConsumerWidget {
+//   const MyRiverpod({super.key});
 //
-// class MyRiverpodState extends State<MyRiverpod> {
 //   @override
-//   Widget build(BuildContext context) {
+//   Widget build(BuildContext context, WidgetRef ref) {
 //     return MaterialApp(
-//       home: HomeScreen(),
+//       home: Scaffold(appBar: AppBar(title: Text('Main')), body:
+//       Center(
+//         child: Column(children: [
+//             Consumer(builder: (context, ref, child) {
+//               final message=ref.watch(myProvider);
+//               return Text(message);
+//             },)
+//           ],),
+//       ),),
 //     );
 //   }
+//
 // }
+
