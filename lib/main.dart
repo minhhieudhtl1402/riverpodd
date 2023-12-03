@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final Provider<String> myProvider = Provider<String>((ref) {
-  return "Hello world";
+  return "Hello world1";
 });
 
 void main() {
@@ -14,12 +14,14 @@ class MyRiverpod extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final messageFromAncestor = ref.watch(myProvider);
     return MaterialApp(
       home: Scaffold(appBar: AppBar(title: Text('Main')), body:
       Center(
         child: Column(children: [
-            Text(messageFromAncestor),
+            Consumer(builder: (context, ref, child) {
+              final message=ref.watch(myProvider);
+              return Text(message);
+            },)
           ],),
       ),),
     );
