@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final Provider<String> myProvider = Provider<String>((ref) {
-  return "Hello world1";
+  return "Hello world123";
 });
 
 void main() {
@@ -20,6 +20,13 @@ class MyRiverpod extends ConsumerStatefulWidget {
 }
 
 class _MyRiverpodState extends ConsumerState<MyRiverpod> {
+  @override
+  void initState() {
+
+    super.initState();
+    final name=ref.read(myProvider);
+    print(name);
+  }
   @override
   Widget build(BuildContext context) {
     final message=ref.watch(myProvider);
